@@ -2,6 +2,9 @@ package ui;
 
 import java.util.Scanner;
 
+import exceptions.MinorException;
+import exceptions.PickAndCedulaException;
+import model.Document;
 import model.MiniMarket;
 
 public class Main {
@@ -40,14 +43,14 @@ public class Main {
 		System.out.println("*    Bienvenido al registro de Mi Barrio Te Quiere    *");
 		System.out.println("*******************************************************\n");
 
-		System.out.println("*********************************************");
-		System.out.println("*                  MENU                     *");
-		System.out.println("*********************************************");
-		System.out.println("* Que desea hacer?:                         *");
-		System.out.println("* (1) Contratar un empleado                 *");
-		System.out.println("* (2) Despedir un empleado                  *");
-		System.out.println("* (0) Salir                                 *");
-		System.out.println("*********************************************");
+		System.out.println("**************************************************************");
+		System.out.println("*                            MENU                            *");
+		System.out.println("**************************************************************");
+		System.out.println("* Que desea hacer?:                                          *");
+		System.out.println("* (1) Registrar el ingreso de una persona                    *");
+		System.out.println("* (2) Mostrar el número de personas que han intentado entrar *");
+		System.out.println("* (0) Salir                                                  *");
+		System.out.println("**************************************************************");
 
 		do {
 			option = lector.nextLine();
@@ -86,9 +89,10 @@ public class Main {
 
 		String option = "";
 		String numberDocument = "";
+		String message = "";
 		int optionToDocument = 0;
 		int lastInteger = 0;
-
+		
 		System.out.println("***********************************************************************");
 		System.out.println("*                       REGISTRO DE UNA PERSONA                       *");
 		System.out.println("***********************************************************************");
@@ -106,30 +110,65 @@ public class Main {
 
 			option = lector.nextLine();
 
-			try {
+			do {
+				try {
 
-				optionToDocument = Integer.parseInt(option);
+					optionToDocument = Integer.parseInt(option);
 
-				if(optionToDocument != 1 && optionToDocument != 2 && optionToDocument != 3 && optionToDocument != 4) {
-					System.out.println("Opción no valida, digitelo nuevamente");
-				}
-				else {
-					System.out.println("Ingrese el número del documento");
+					if(optionToDocument != 1 && optionToDocument != 2 && optionToDocument != 3 && optionToDocument != 4) {
+						System.out.println("Opción no valida, digitelo nuevamente");
+					}
+					else {
+						
+						System.out.println("Ingrese el número del documento");
+
+						numberDocument = lector.nextLine();
+
+						lastInteger = Integer.parseInt(numberDocument.substring(numberDocument.length()-2));
+						
+						switch(optionToDocument) {
+						case 1:
+							message = market.addPeople(Document.TI, numberDocument);
+							break;
+						case 2:
+							message = market.addPeople(Document.CC, numberDocument);
+							break;
+						case 3:
+							message = market.addPeople(Document.PP, numberDocument);
+							break;
+						case 4:
+							message = market.addPeople(Document.CE, numberDocument);
+							break;
+						}
+					}
+
+				}catch(NumberFormatException e) {
+					System.out.println("El valor digitado no tiene el penúltimo valor numérico, por favor corregirlo");
+				}catch(MinorException mE) {
 					
-					numberDocument = lector.nextLine();
-					
-					lastInteger = Integer.parseInt(numberDocument.substring(numberDocument.length()));
+					System.out.println("***********************************************************************************");
+					System.out.println("*  La persona que está intentando ingresar NO puede entrar por ser menor de edad  *");
+					System.out.println("***********************************************************************************");
+				}catch(PickAndCedulaException pcE) {
+					System.out.println("**********************************************************************************************");
+					System.out.println("*  La persona que está intentando ingresar NO puede entrar porque no le corresponde el día   *");
+					System.out.println("**********************************************************************************************");
 				}
-				
-				//market.createPeople(optionToDocument, numberDocument);
-				
-			}catch(NumberFormatException e) {
-				System.out.println("El valor digitado no es numérico, por favor corregirlo");
-			}
-		}while(optionToDocument != 1 && optionToDocument != 2 && optionToDocument != 3 && optionToDocument != 4 && lastInteger == 0);
+
+			}while(lastInteger == 0);
+			
+		}while(optionToDocument != 1 && optionToDocument != 2 && optionToDocument != 3 && optionToDocument != 4);
+		
+		
+		System.out.println(message);
 	}
 
 	public void consultPerson() {
-
+		
+		System.out.println("***********************************************************************");
+		System.out.println("*       NUMERO DE PERSONAS QUE HAN INTENTADO INGRESAR AL LOCAL        *");
+		System.out.println("***********************************************************************");
+		
+		System.out.println("Número de personas: "+market.getContPoeple());
 	}
 }
