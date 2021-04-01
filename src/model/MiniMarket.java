@@ -44,7 +44,7 @@ public class MiniMarket {
 			if((day % 2 == 0 && numberOfDocument % 2 != 0) || (day % 2 != 0 && numberOfDocument % 2 == 0)) {
 				people.add(new People(document,numberDocument));
 				
-				message = "La personas puede ingresar";
+				message = "La persona puede ingresar";
 			}
 			else {
 				throw new PickAndCedulaException();
