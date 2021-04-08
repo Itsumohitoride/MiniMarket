@@ -48,7 +48,7 @@ public class Main {
 		System.out.println("**************************************************************");
 		System.out.println("* Que desea hacer?:                                          *");
 		System.out.println("* (1) Registrar el ingreso de una persona                    *");
-		System.out.println("* (2) Mostrar el nï¿½mero de personas que han intentado entrar*");
+		System.out.println("* (2) Mostrar el número de personas que han intentado entrar *");
 		System.out.println("* (0) Salir                                                  *");
 		System.out.println("**************************************************************");
 
@@ -77,7 +77,7 @@ public class Main {
 					break;
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("El valor digitado no es numï¿½rico, por favor corregirlo");
+				System.out.println("El valor digitado no es numérico, por favor corregirlo");
 			}
 
 		}while(optionToSwitch != 1 && optionToSwitch != 2 && optionToSwitch != 0);
@@ -101,9 +101,9 @@ public class Main {
 		System.out.println("* Que tipo de documento tiene? *");
 		System.out.println("********************************");
 		System.out.println("* (1) Tarjeta de Identidad     *");
-		System.out.println("* (2) Cï¿½dula de Ciudadanï¿½a     *");
+		System.out.println("* (2) Cédula de Ciudadanía     *");
 		System.out.println("* (3) Pasaporte                *");
-		System.out.println("* (4) Cï¿½dula de Extranjerï¿½a    *");
+		System.out.println("* (4) Cédula de Extranjería    *");
 		System.out.println("********************************");
 
 		do {
@@ -116,11 +116,11 @@ public class Main {
 					optionToDocument = Integer.parseInt(option);
 
 					if(optionToDocument != 1 && optionToDocument != 2 && optionToDocument != 3 && optionToDocument != 4) {
-						System.out.println("Opciï¿½n no valida, digitelo nuevamente");
+						System.out.println("Opción no valida, digitelo nuevamente");
 					}
 					else {
 						
-						System.out.println("Ingrese el nï¿½mero del documento");
+						System.out.println("Ingrese el número del documento");
 
 						numberDocument = lector.nextLine();
 
@@ -143,15 +143,15 @@ public class Main {
 					}
 
 				}catch(NumberFormatException e) {
-					System.out.println("El valor digitado no tiene el penï¿½ltimo valor numï¿½rico, por favor corregirlo");
+					System.out.println("El valor digitado no tiene el penúltimo valor numérico, por favor corregirlo");
 				}catch(MinorException mE) {
 					
 					System.out.println("***********************************************************************************");
-					System.out.println("*  La persona que estï¿½ intentando ingresar NO puede entrar por ser menor de edad  *");
+					System.out.println("*  La persona que esté intentando ingresar NO puede entrar por ser menor de edad  *");
 					System.out.println("***********************************************************************************");
 				}catch(PickAndCedulaException pcE) {
 					System.out.println("**********************************************************************************************");
-					System.out.println("*  La persona que estï¿½ intentando ingresar NO puede entrar porque no le corresponde el dï¿½a   *");
+					System.out.println("*  La persona que está intentando ingresar NO puede entrar porque no le corresponde el día   *");
 					System.out.println("**********************************************************************************************");
 				}
 
@@ -169,6 +169,6 @@ public class Main {
 		System.out.println("*       NUMERO DE PERSONAS QUE HAN INTENTADO INGRESAR AL LOCAL        *");
 		System.out.println("***********************************************************************");
 		
-		System.out.println("Nï¿½mero de personas: "+market.getContPoeple());
+		System.out.println("Número de personas: "+market.getContPoeple());
 	}
 }
